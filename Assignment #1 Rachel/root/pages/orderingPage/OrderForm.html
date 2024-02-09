@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <link rel="stylesheet" href="./style.css"/>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ordering-Form</title>
+
+    </head>
+
+
+
+    <body>
+        <a href="root\indexPage\index.html">
+            <div class="flex-container">
+                <div class="flex-items">
+                    <svg>
+                        <text x="39%" y="65%"  >
+                            Java Bean ☕︎ Shop
+                        </text>
+                    </svg>
+                </div>
+            </div>
+        </a>
+        
+
+        
+        <p> * = Required fields</p>
+
+            <div>
+                <form> 
+                    <div id="stu"> <!-- Div for Student id -->
+
+                    
+                        <label for="StuID"> Student ID * </label>
+                        <input type="text" name="StuID" id="StuID" placeholder="Your Student ID"> 
+                        <!-- Add input validation for the student number.. make sure it 9 digits and only digits -->
+                    </div>                    
+                        
+                    <!-- BELOW IS STUFF FOR ACTUALLY TAKING ORDER -->
+
+                    <div id="flname"> <!-- Div for First and Last Name-->
+                        <h2>Your Name</h2>
+                        <label for="fname"> First Name*: </label>
+                        <input type="text" name="fname" id="fname" placeholder="First Name">
+                        
+                        <br> <!-- Line Spacing, didnt use div because i wanted to keep it in same section-->
+                        
+                        <label for="lname"> Last Name: </label>
+                        <input type="text" name="lname" id="lname" placeholder="Last Name">
+
+                    </div>
+                    
+                    <div id="addr"> <!-- Div for Address-->
+                        <h2> Your address * </h2>
+                        <table >
+                            <tr> 
+                                <th> Address </th>
+                                <th> Email & Phone </th>
+                            </tr>
+
+                            <tr> <!-- Row For Street Number -->
+                                <td>
+                                    <label for="streetNo"> Street No: </label>
+                                    <input type="number" name="streetNo" id="streetNo" placeholder="#" min = "0">
+                                </td>
+                                <td>
+                                    <label for="email"> email: </label>
+                                    <input type="text" name="email" id="email" placeholder="email"> <!-- Will add dynamic js after -->
+                                </td>
+                            </tr>
+                                
+                            <tr>  <!-- Row For Street Name -->
+                                <td>
+                                    <label for="streetName"> Street Name: </label>
+                                    <input type="text" name="streetName" id="streetName" placeholder="Street Name">
+                                </td>
+                                <td aria>
+                                    <label for="phone"> Phone: </label>
+                                    <input type="text" name="phone" id="phone" placeholder="+1 ###-###-####"> <!-- Will add dynamic js after -->
+                                </td>
+                            </tr>
+                            
+                            <tr>  <!-- Row For province (JS for Province and City goes together)-->
+                                <td>
+                                    <label for="postal"> Postal Code: </label>
+                                    <input type="text" name="postal" id="postal" placeholder="A1A 1A1">
+                                </td>
+                                <td >
+                                    <label for="province"> Province: </label>
+                                        <select name="province" id="province"> <!-- for the abbreviations i used this page from canadian goverment : https://www150.statcan.gc.ca/n1/pub/92-195-x/2011001/geo/prov/tbl/tbl8-eng.htm -->
+                                            <option>Alberta</option>
+                                            <option value="BritishColumbia">British Columbia</option>
+                                            <option>Manitoba</option>
+                                            <option value="NewBrunswick">New Brunswick</option>
+                                            <option value="NewfoundlandAndLabrador">Newfoundland and Labrador</option>
+                                            <option value="">Nova Scotia</option>
+                                            <option >Ontario</option>
+                                            <option value="PrinceEdwardIsland">Prince Edward Island</option>
+                                            <option>Quebec</option>
+                                            <option>Saskatchewan</option>
+                                            <option value="NorthwestTerritories">Northwest Territories</option>
+                                            <option>Nunavut</option>
+                                            <option>Yukon</option>
+                                        </select>
+                                    </td>
+                                
+                            </tr>
+                            <tr>
+                               
+                                <td rowspan="2" colspan="2">
+                                    <label for="city"> City: </label>
+                                    <select id="citySelect">
+                                        <option id="city1"></option>
+                                        <option id="city2"></option>
+                                        <option id="city3"></option>
+                                        <option id="city4"></option>
+                                        <option id="city5"></option>
+                                        <option id="city6"></option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </table>
+                        
+                        <script>
+                            var citiesByProvince = {
+                                Alberta: ['Calgary','Edmonton', 'Red Deer', 'Lethbridge', 'St. Albert', 'Airdrie'],
+                                BritishColumbia: ['Vancouver', 'Victoria', 'Surrey', 'Burnaby', 'Richmond', 'Abbotsford'],
+                                Manitoba: ['Winnipeg', 'Brandon', 'Steinbach', 'Thompson', 'Portage la Prairie', 'Winkler'],
+                                NewBrunswick: ['Moncton', 'Saint John', 'Fredericton', 'Dieppe', 'Riverview', 'Quispamsis'],
+                                NewfoundlandAndLabrador: ['St. Johns', 'Mount Pearl', 'Conception Bay South', 'Corner Brook', 'Paradise', 'Grand Falls-Windsor'],
+                                NovaScotia: ['Halifax', 'Sydney', 'Truro', 'New Glasgow', 'Glace Bay', 'Kentville'],
+                                Ontario: ['Toronto', 'Ottawa', 'Mississauga', 'Brampton', 'Hamilton', 'London'],
+                                PrinceEdwardIsland: ['Charlottetown', 'Summerside', 'Stratford', 'Cornwall', 'Montague', 'Kensington'],
+                                Quebec: "CAN'T SHIP HERE !!!",
+                                Saskatchewan: ['Saskatoon', 'Regina', 'Prince Albert', 'Moose Jaw', 'Yorkton', 'Swift Current'],
+                                NorthwestTerritories: ['Yellowknife', 'Hay River', 'Inuvik', 'Fort Smith', 'Behchokǫ̀', 'Fort Simpson'],
+                                Nunavut: ['Iqaluit', 'Rankin Inlet', 'Arviat', 'Baker Lake', 'Cambridge Bay', 'Pond Inlet'],
+                                Yukon: ['Whitehorse', 'Dawson City', 'Watson Lake', 'Haines Junction', 'Carmacks', 'Farro']
+                            };
+            
+                            function updateCities() {
+                                var provinceSelect = document.getElementById("province");
+                                var citySelect = document.getElementById("citySelect");
+            
+                                citySelect.innerHTML = "";
+                                var selectedProvince = provinceSelect.value;
+            
+                                
+                                var cities = citiesByProvince[selectedProvince];
+            
+                                
+                                if (typeof cities !== "string") {
+                                    cities.forEach(function (city, index) {
+                                        var option = document.createElement("option");
+                                        option.value = city;
+                                        option.text = city;
+                                        citySelect.add(option);});
+                                } else {
+                                    var option = document.createElement("option");
+                                    option.text = cities;
+                                    citySelect.add(option);
+                                }
+            
+                              
+                                citySelect.addEventListener("change", function () {
+                                    var selectedCity = citySelect.value;
+                                    console.log("Selected City:", selectedCity); });
+                            }
+            
+                            
+                            document.addEventListener("DOMContentLoaded", function () {
+                                
+                                updateCities();
+            
+                                
+                            document.getElementById("province").addEventListener("change", updateCities);
+                            });
+                        </script>
+
+                    </div>
+
+                    <div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+    </body>
+
+</html>
